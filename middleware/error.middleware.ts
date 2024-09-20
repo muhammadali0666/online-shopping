@@ -1,4 +1,4 @@
-import BaseError from "../error/base_error";
+import BaseError from "../utils/base_error";
 import { Request, Response, NextFunction } from "express";
 
 export default function errorHandler(err: unknown, req: Request, res: Response, next: NextFunction) {
