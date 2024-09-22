@@ -13,7 +13,6 @@ const connectDB = async (): Promise<void> => {
       .connect(dbUri, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        useCreateIndex: true
       } as ConnectOptions)
       .then(() => console.log("MongoDB connected successfully"));
   } catch (err: unknown) {

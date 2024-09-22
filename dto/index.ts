@@ -8,4 +8,10 @@ interface ILogin {
   email: string
 }
 
-export {IVerifyCode, ILogin}
+interface IRegister {
+  username: string;
+  password: string;
+  email: string
+}
+
+export {IVerifyCode, ILogin, IRegister}
