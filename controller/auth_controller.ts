@@ -4,11 +4,12 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken"
 import bcrypt from "bcryptjs"
 import dotenv from "dotenv"
+import { ILogin, IVerifyCode } from "../dto";
 dotenv.config()
 
 export const verifyCode = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
     try {
-        const { verify, email } = req.body;
+        const { verify, email } = req.body as IVerifyCode;
 
         const user = await Auths.findOne({ email: email });
 
@@ -41,7 +42,7 @@ export const verifyCode = async (req: Request, res: Response, next: NextFunction
 
 export const login = async (req: Request, res: Response, next: NextFunction):Promise<Response | void> => {
     try {
-        const { email, password } = req.body;
+        const { email, password } = req.body as ILogin;
 
         let user = await Auths.findOne({ email: email });
 
