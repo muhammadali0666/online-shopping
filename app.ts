@@ -7,6 +7,8 @@ import connectDb from "./database/config";
 import authRouter from "./router/auth_router";
 import multer, { StorageEngine } from "multer"
 import path from "path";
+import swaggerUi from 'swagger-ui-express';
+import swaggerJSDoc from 'swagger-jsdoc';
 
 const app: Application = express();
 
@@ -24,6 +26,31 @@ app.use(
 );
 
 connectDb()
+
+///////////////// swagger
+
+const swaggerOptions = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Authentication API',
+      version: '1.0.0',
+      description: 'API for user registration, verification, and login',
+    },
+    servers: [
+      {
+        url: 'http://localhost:4001',
+        description: 'Local development server',
+      },
+    ],
+  },
+  apis: ['./router/*ts'], 
+};
+
+const swaggerDocs = swaggerJSDoc(swaggerOptions);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
 
 ///////////////// image storage engine
 
